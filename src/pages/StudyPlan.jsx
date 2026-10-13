@@ -21,7 +21,8 @@ const StudyPlan = () => {
     
     try {
       // 1. Call Gemini Backend for AI Task Breakdown
-      const response = await fetch('http://localhost:8080/api/breakdown-task', {
+      const apiUrl = import.meta.env.VITE_BACKEND_URL || '/api/breakdown-task';
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ goal: `${newGoal.title} - ${newGoal.subject} (Deadline: ${newGoal.deadline}, Time: ${newGoal.time})` })

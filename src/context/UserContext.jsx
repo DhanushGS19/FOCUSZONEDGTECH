@@ -65,9 +65,9 @@ export const UserProvider = ({ children }) => {
   const [materials, setMaterials] = useState(DEMO_MATERIALS);
   const [classes, setClasses] = useState(DEMO_CLASSES);
   const [challenges, setChallenges] = useState(DEMO_CHALLENGES);
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // For login flow
-
-  // Load from local storage on mount (optional, we can just keep it in memory for demo)
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return localStorage.getItem('focusflow_auth') === 'true';
+  });
   
   const addXp = (amount) => {
     setUser(prev => ({ ...prev, xp: prev.xp + amount }));
@@ -102,8 +102,14 @@ export const UserProvider = ({ children }) => {
     }
   };
   
-  const login = () => setIsAuthenticated(true);
-  const logout = () => setIsAuthenticated(false);
+  const login = () => {
+    localStorage.setItem('focusflow_auth', 'true');
+    setIsAuthenticated(true);
+  };
+  const logout = () => {
+    localStorage.removeItem('focusflow_auth');
+    setIsAuthenticated(false);
+  };
 
   const level = Math.floor(user.xp / 1000) + 1;
   const currentLevelXp = user.xp % 1000;
