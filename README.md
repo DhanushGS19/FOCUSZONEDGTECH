@@ -1,16 +1,37 @@
-# React + Vite
+# FocusFlow - AI Productivity App
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+This is a React + Vite application with an Express/Cloud Run backend for Gemini AI features.
 
-Currently, two official plugins are available:
+## Architecture & Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Frontend:** React 19, Vite, React Router, Vanilla CSS
+- **Backend:** Node.js/Express server (designed for Google Cloud Run) exposing AI endpoints securely.
+- **Database:** Firebase Cloud Firestore
+- **AI Integration:** Google Gemini (via `@google/generative-ai`)
 
-## React Compiler
+### Implemented Features
+1. **AI Task Breakdown:** Submit a big goal (e.g. "Prepare for DBMS Exam") and Gemini intelligently splits it into actionable subtasks with time estimates. Results are saved to Firestore.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Setup Instructions
 
-## Expanding the Oxlint configuration
+### 1. Frontend Setup
+1. Copy `.env.example` to `.env` in the root folder.
+2. Go to [Firebase Console](https://console.firebase.google.com/), create a project, enable Firestore and Authentication.
+3. Add a Web App to Firebase and copy the API keys into your `.env` file.
+4. Run the frontend:
+   ```bash
+   npm install
+   npm run dev
+   ```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+### 2. Backend Setup
+1. Navigate to the `backend` folder: `cd backend`
+2. Install dependencies: `npm install`
+3. Copy `backend/.env.example` to `backend/.env`
+4. Go to [Google AI Studio](https://aistudio.google.com/) or Google Cloud, get a Gemini API Key, and paste it into `GEMINI_API_KEY` in `backend/.env`.
+5. Run the backend server:
+   ```bash
+   node server.js
+   ```
+
+The backend runs on `http://localhost:8080` and the frontend runs on `http://localhost:5173`.

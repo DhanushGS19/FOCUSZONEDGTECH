@@ -1,72 +1,117 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Play, Trophy, BookOpen, Star } from 'lucide-react';
-import './Home.css';
 import { useUser } from '../context/UserContext';
+import { useNavigate } from 'react-router-dom';
+import { Play, CheckCircle2, Flame, Trophy, Sparkles } from 'lucide-react';
+import './Home.css';
 
 const Home = () => {
+  const { user, goals, leaderboard, materials, classes } = useUser();
   const navigate = useNavigate();
-  const { xp, level, currentLevelXp, xpForNextLevel } = useUser();
 
-  const subjects = [
-    { name: 'Mathematics', color: '#3b82f6', icon: '📐' },
-    { name: 'Science', color: '#10b981', icon: '🔬' },
-    { name: 'History', color: '#f59e0b', icon: '🏛️' },
-    { name: 'Coding', color: '#8b5cf6', icon: '💻' }
-  ];
+  const activeGoal = goals[0]; // For demo, just pick the first goal
+  const completedTasks = activeGoal?.tasks.filter(t => t.completed).length || 0;
+  const totalTasks = activeGoal?.tasks.length || 0;
+  const progress = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+  
+  const userRank = leaderboard.find(u => u.userId === user.id)?.rank;
 
   return (
-    <div className="home-container">
-      <header className="home-header">
-        <div>
-          <h1 className="text-4xl font-bold mb-2">Welcome back to the Zone.</h1>
-          <p className="text-muted">You are currently Level {level}. Keep the streak alive!</p>
-        </div>
-        <button className="primary" onClick={() => navigate('/focus')}>
-          <Play size={18} style={{ marginRight: '8px', display: 'inline', verticalAlign: 'middle' }} />
-          Start Focus Session
-        </button>
+    <div className="home-dashboard fade-in">
+      <header className="dashboard-header mb-4">
+        <h1>Good morning, {user.name.split(' ')[0]} 👋</h1>
+        <p className="text-muted">Ready to crush your goals today?</p>
       </header>
 
-      <section className="dashboard-grid">
-        <div className="glass-panel quick-stats">
-          <h3 className="mb-4 flex items-center gap-2"><Star style={{ color: 'var(--accent)' }} /> Your Progress</h3>
-          <div className="stat-row">
-            <span className="stat-label">Total XP</span>
-            <span className="stat-value">{xp}</span>
+      <div className="dashboard-grid">
+        {/* Today's Focus */}
+        <section className="glass-panel col-span-2">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-2xl flex items-center gap-2">
+              <Sparkles className="text-primary" /> Today's Focus
+            </h2>
+            <span className="deadline-badge">Due in {activeGoal?.deadline}</span>
           </div>
-          <div className="stat-row">
-            <span className="stat-label">Current Level</span>
-            <span className="stat-value">{level}</span>
-          </div>
-          <div className="progress-bar-bg mt-4">
-            <div className="progress-bar-fill" style={{ width: `${(currentLevelXp / 100) * 100}%` }}></div>
-          </div>
-          <p className="text-xs text-muted mt-2" style={{ fontSize: '0.75rem' }}>{100 - currentLevelXp} XP to Level {level + 1}</p>
-        </div>
-
-        <div className="glass-panel weekend-event">
-          <div className="event-badge">LIVE NOW</div>
-          <h3 className="text-2xl font-bold mb-2">Weekend MCQ Battle</h3>
-          <p className="mb-4">Compete with others in the Science mega-quiz and win up to 500 XP!</p>
-          <button onClick={() => navigate('/tests')}>
-            Join Competition <Trophy size={16} style={{ display: 'inline', marginLeft: '4px', verticalAlign: 'middle' }}/>
-          </button>
-        </div>
-      </section>
-
-      <section className="subjects-section">
-        <h2 className="mb-4 flex items-center gap-2" style={{ marginTop: '2rem' }}><BookOpen /> Core Subjects</h2>
-        <div className="subjects-grid">
-          {subjects.map(sub => (
-            <div key={sub.name} className="subject-card" style={{ '--sub-color': sub.color }}>
-              <div className="subject-icon">{sub.icon}</div>
-              <h3>{sub.name}</h3>
-              <p>Explore lessons & quizzes</p>
+          
+          <div className="focus-card-content">
+            <div className="focus-details">
+              <h3>{activeGoal?.title}</h3>
+              <div className="progress-container mt-4 mb-4">
+                <div className="flex justify-between mb-2 text-sm">
+                  <span>Progress</span>
+                  <span>{progress}%</span>
+                </div>
+                <div className="progress-bar-bg">
+                  <div className="progress-bar-fill" style={{ width: `${progress}%` }}></div>
+                </div>
+              </div>
+              <button className="primary flex items-center gap-2" onClick={() => navigate('/focus')}>
+                <Play size={18} fill="currentColor" /> Start Focus Session
+              </button>
             </div>
-          ))}
+            
+            <div className="study-plan-mini">
+              <h4>Study Plan Tasks</h4>
+              <ul className="task-list mt-4">
+                {activeGoal?.tasks.slice(0,4).map(task => (
+                  <li key={task.id} className={`task-item ${task.completed ? 'completed' : ''}`}>
+                    <CheckCircle2 size={18} className={task.completed ? 'text-accent' : 'text-muted'} />
+                    <span>{task.title}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* Stats & Competition */}
+        <div className="flex-col gap-4">
+          <section className="glass-panel stats-card flex justify-between items-center">
+            <div>
+              <h3 className="text-muted text-sm font-bold uppercase tracking-wider mb-1">Current Streak</h3>
+              <div className="flex items-center gap-2 text-3xl font-bold">
+                <Flame className="text-accent" size={32} /> {user.streak} Days
+              </div>
+            </div>
+            <div className="text-right">
+              <h3 className="text-muted text-sm font-bold uppercase tracking-wider mb-1">Total XP</h3>
+              <div className="text-3xl font-bold text-primary">{user.xp}</div>
+            </div>
+          </section>
+
+          <section className="glass-panel competition-card text-center relative overflow-hidden">
+            <div className="bg-glow"></div>
+            <Trophy className="text-accent mb-2 mx-auto" size={40} />
+            <h3 className="mb-2">You are #{userRank} this week</h3>
+            <p className="text-sm text-muted mb-4">Keep learning to climb the leaderboard!</p>
+            <button className="w-full" onClick={() => navigate('/competition')}>View Leaderboard</button>
+          </section>
         </div>
-      </section>
+
+        {/* Recommended Learning */}
+        <section className="glass-panel col-span-3">
+          <h2 className="mb-4">Recommended for {activeGoal?.subject}</h2>
+          <div className="recommendations-grid">
+            {materials.filter(m => m.subject === activeGoal?.subject).slice(0, 2).map(m => (
+              <div key={m.id} className="rec-card" onClick={() => navigate('/learn')}>
+                <div className="rec-icon">📚</div>
+                <div className="rec-info">
+                  <h4>{m.title}</h4>
+                  <p className="text-xs text-muted">{m.category}</p>
+                </div>
+              </div>
+            ))}
+            {classes.filter(c => c.title.includes(activeGoal?.subject)).slice(0, 1).map(c => (
+              <div key={c.id} className="rec-card class-card" onClick={() => navigate('/learn')}>
+                <div className="rec-icon">🎓</div>
+                <div className="rec-info">
+                  <h4>{c.title}</h4>
+                  <p className="text-xs text-muted">Masterclass</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
     </div>
   );
 };

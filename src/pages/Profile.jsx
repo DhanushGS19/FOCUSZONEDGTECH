@@ -1,69 +1,94 @@
 import React from 'react';
 import { useUser } from '../context/UserContext';
-import { Award, Timer, Target } from 'lucide-react';
+import { Shield, Mail, Edit3, Camera } from 'lucide-react';
 import './Profile.css';
 
 const Profile = () => {
-  const { xp, level, currentLevelXp } = useUser();
-
-  const milestones = [
-    { name: "First Focus", desc: "Complete 1 focus session", done: true },
-    { name: "Quiz Master", desc: "Score 100% on a test", done: xp > 100 },
-    { name: "Marathon", desc: "Focus for 45 minutes", done: false },
-    { name: "Centurion", desc: "Reach Level 5", done: level >= 5 },
-  ];
+  const { user } = useUser();
 
   return (
-    <div className="profile-container">
-      <div className="profile-header glass-panel">
-        <div className="avatar">
-          <div className="avatar-3d"></div>
-        </div>
-        <div className="profile-info">
-          <h1>Student Warrior</h1>
-          <p className="text-muted text-xl mb-4">Level {level} Scholar</p>
+    <div className="profile-container fade-in">
+      <header className="mb-6">
+        <h1>Profile</h1>
+        <p className="text-muted">Manage your student identity</p>
+      </header>
+
+      <div className="profile-grid">
+        <div className="profile-sidebar">
+          <div className="glass-panel text-center mb-6">
+            <div className="profile-avatar-lg mx-auto mb-4 relative">
+              {user.name.charAt(0)}
+              <button className="avatar-edit-btn"><Camera size={16} /></button>
+            </div>
+            <h2 className="text-2xl mb-1">{user.name}</h2>
+            <p className="text-muted mb-4">{user.course} • {user.year}</p>
+            <div className="level-badge inline-block mx-auto">
+              Level {Math.floor(user.xp/1000) + 1}
+            </div>
+          </div>
           
-          <div className="progress-bar-bg" style={{ width: '100%', height: '10px', background: 'rgba(255,255,255,0.1)', borderRadius: '5px', overflow: 'hidden' }}>
-            <div className="progress-bar-fill" style={{ width: `${(currentLevelXp / 100) * 100}%`, height: '100%', background: 'linear-gradient(90deg, var(--primary), var(--accent))' }}></div>
-          </div>
-          <p className="text-sm mt-2">{currentLevelXp} / 100 XP to Level {level + 1}</p>
-        </div>
-      </div>
-
-      <div className="stats-grid mt-4 mb-8">
-        <div className="glass-panel text-center">
-          <Target className="mb-2 text-accent" size={32} style={{ margin: '0 auto' }} />
-          <h3 className="text-3xl font-bold">{xp}</h3>
-          <p className="text-muted">Total XP</p>
-        </div>
-        <div className="glass-panel text-center">
-          <Timer className="mb-2 text-primary" size={32} style={{ margin: '0 auto' }} />
-          <h3 className="text-3xl font-bold">12</h3>
-          <p className="text-muted">Sessions</p>
-        </div>
-        <div className="glass-panel text-center">
-          <Award className="mb-2 text-danger" size={32} style={{ margin: '0 auto' }} />
-          <h3 className="text-3xl font-bold">{level}</h3>
-          <p className="text-muted">Current Level</p>
-        </div>
-      </div>
-
-      <h2 className="mb-4">Achievements</h2>
-      <div className="achievements-list">
-        {milestones.map(m => (
-          <div key={m.name} className={`achievement-card ${m.done ? 'unlocked' : 'locked'}`}>
-            <div className="achieve-icon">
-              <Award size={24} />
+          <div className="glass-panel">
+            <h3 className="mb-4">Recent Badges</h3>
+            <div className="badges-list flex flex-wrap gap-2">
+              {user.badges.map((badge, i) => (
+                <div key={i} className="badge-item">{badge}</div>
+              ))}
+              <div className="badge-item locked">🔒 Focus Warrior</div>
             </div>
+          </div>
+        </div>
+
+        <div className="profile-main">
+          <div className="glass-panel mb-6">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-xl">Personal Information</h2>
+              <button className="icon-btn"><Edit3 size={18} /></button>
+            </div>
+            
+            <div className="info-grid">
+              <div className="info-group">
+                <label>Full Name</label>
+                <div className="info-value">{user.name}</div>
+              </div>
+              <div className="info-group">
+                <label>Email</label>
+                <div className="info-value">alex@student.edu</div>
+              </div>
+              <div className="info-group">
+                <label>University</label>
+                <div className="info-value">{user.university}</div>
+              </div>
+              <div className="info-group">
+                <label>Course/Branch</label>
+                <div className="info-value">{user.course}</div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="glass-panel">
+            <h2 className="text-xl mb-6">Learning Goals & Subjects</h2>
+            
+            <div className="mb-6">
+              <h4 className="text-sm text-muted uppercase tracking-wider mb-3">Target Subjects</h4>
+              <div className="flex flex-wrap gap-2">
+                {user.subjects.map((sub, i) => (
+                  <span key={i} className="subject-tag">{sub}</span>
+                ))}
+                <button className="subject-tag add-new">+ Add</button>
+              </div>
+            </div>
+            
             <div>
-              <h3>{m.name}</h3>
-              <p className="text-muted text-sm">{m.desc}</p>
-            </div>
-            <div className="status-badge ml-auto">
-              {m.done ? 'Unlocked' : 'Locked'}
+              <h4 className="text-sm text-muted uppercase tracking-wider mb-3">Account Settings</h4>
+              <button className="flex items-center gap-2 text-muted hover-white mb-3 bg-transparent p-0">
+                <Shield size={18} /> Privacy & Security
+              </button>
+              <button className="flex items-center gap-2 text-muted hover-white bg-transparent p-0">
+                <Mail size={18} /> Email Notifications
+              </button>
             </div>
           </div>
-        ))}
+        </div>
       </div>
     </div>
   );

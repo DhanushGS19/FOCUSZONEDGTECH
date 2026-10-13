@@ -1,0 +1,48 @@
+.progress-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.stat-box {
+  padding: 2rem 1rem;
+}
+
+.text-warning { color: #fbbf24; }
+
+.insight-text {
+  padding: 1rem;
+  background: rgba(0,0,0,0.2);
+  border-radius: 12px;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.insight-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.insight-dot.good { background: var(--accent); }
+.insight-dot.warning { background: #fbbf24; }
+
+.subject-mastery-card {
+  padding: 1.5rem;
+}
+
+.bg-danger-gradient {
+  background: linear-gradient(90deg, #f43f5e, #fb7185);
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
