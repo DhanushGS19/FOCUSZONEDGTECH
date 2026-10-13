@@ -18,7 +18,27 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { goal } = req.body || {};
+  let body = req.body;
+  if (!body && req.readable) {
+    try {
+      const buffers = [];
+      for await (const chunk of req) {
+        buffers.push(chunk);
+      }
+      const raw = Buffer.concat(buffers).toString();
+      body = JSON.parse(raw);
+    } catch {
+      body = {};
+    }
+  } else if (typeof body === 'string') {
+    try {
+      body = JSON.parse(body);
+    } catch {
+      body = {};
+    }
+  }
+
+  const goal = body?.goal;
   if (!goal) {
     return res.status(400).json({ error: 'Goal is required' });
   }
