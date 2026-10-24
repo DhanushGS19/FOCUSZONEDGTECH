@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
 import { Play, Pause, CheckSquare, BrainCircuit, X } from 'lucide-react';
 import './Focus.css';
 
 const Focus = () => {
+  const navigate = useNavigate();
   const { goals, completeTask, completeFocusSession } = useUser();
   const [timeLeft, setTimeLeft] = useState(25 * 60);
   const [isActive, setIsActive] = useState(false);
@@ -99,7 +101,7 @@ const Focus = () => {
       </div>
       
       <div className="focus-actions flex justify-center gap-4 mt-6">
-        <button className="action-btn stuck-btn" onClick={() => window.location.href = '/chat'}>
+        <button className="action-btn stuck-btn" onClick={() => navigate('/chat')}>
           <BrainCircuit size={20} /> I'm Stuck (AI Help)
         </button>
         <button className="action-btn complete-btn" onClick={handleCompleteTask}>

@@ -106,3 +106,22 @@
   color: var(--primary-hover);
   text-decoration: underline;
 }
+
+@media (max-width: 640px) {
+  .login-container {
+    padding: 1.25rem 1rem;
+    align-items: center;
+  }
+  .login-glass {
+    padding: 2rem 1.25rem;
+    border-radius: 20px;
+  }
+  .brand-title {
+    font-size: 2rem;
+  }
+  .brand-tagline {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+}
+

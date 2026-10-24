@@ -160,8 +160,31 @@
     grid-template-columns: 1fr 1fr;
   }
 }
+
 @media (max-width: 640px) {
+  .dashboard-header h1 {
+    font-size: 1.5rem;
+  }
+  .focus-card-content {
+    gap: 1.25rem;
+  }
+  .focus-details button {
+    width: 100%;
+    justify-content: center;
+  }
+  .stats-card {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 1rem;
+  }
+  .stats-card .text-right {
+    text-align: left;
+  }
   .recommendations-grid {
     grid-template-columns: 1fr;
   }
+  .rec-card {
+    padding: 0.875rem;
+  }
 }
+

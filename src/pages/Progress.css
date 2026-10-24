@@ -44,5 +44,19 @@
 @media (max-width: 768px) {
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
   }
 }
+
+@media (max-width: 480px) {
+  .stats-grid {
+    gap: 0.75rem;
+  }
+  .stat-box {
+    padding: 1.25rem 0.5rem;
+  }
+  .stat-box .text-3xl {
+    font-size: 1.3rem;
+  }
+}
+

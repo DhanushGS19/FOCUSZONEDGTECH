@@ -122,5 +122,12 @@ button.subject-tag.add-new:hover {
   }
   .info-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .profile-avatar-lg {
+    width: 90px;
+    height: 90px;
+    font-size: 2.25rem;
   }
 }
+
