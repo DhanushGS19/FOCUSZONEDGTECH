@@ -1,18 +1,18 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, Sparkles } from 'lucide-react';
+import { Send, Sparkles, X } from 'lucide-react';
 import './AuraBot.css';
 
 const GEN_Z_RESPONSES = [
-  "Bet! Let's break this down, no cap.",
-  "You're literally cooking right now. Keep going!",
-  "W progress! The answer is lowkey right in front of you.",
-  "That's valid. Honestly, think about it like this...",
-  "Big brain energy! Let me explain...",
-  "I gotchu bestie. Here's the tea on that topic ☕",
-  "It's giving straight A's. Let's look at the formula again.",
+  "Bet! Let's break this down, no cap. Think of it in 3 steps: input, process, output.",
+  "You're literally cooking right now. Keep this streak going! 🔥",
+  "W progress! The answer is lowkey right in front of you. Check the core theorem.",
+  "That's valid. Honestly, think about it like this: memory and speed are always a tradeoff.",
+  "Big brain energy! Let's conquer this topic before the timer ends.",
+  "I gotchu bestie. Here's the tea: active practice beats passive reading every single time ☕",
+  "It's giving straight A's! Keep focusing on the subtasks.",
 ];
 
-const AuraBot = ({ isWidget = false }) => {
+const AuraBot = ({ isWidget = false, onClose }) => {
   const [messages, setMessages] = useState([
     { id: 1, text: "Hey bestie ✨ I'm Aura, your AI study buddy. What are we grinding today?", sender: 'bot' }
   ]);
@@ -41,7 +41,7 @@ const AuraBot = ({ isWidget = false }) => {
       const randomResponse = GEN_Z_RESPONSES[Math.floor(Math.random() * GEN_Z_RESPONSES.length)];
       setMessages(prev => [...prev, { id: Date.now() + 1, text: randomResponse, sender: 'bot' }]);
       setIsTyping(false);
-    }, 1500);
+    }, 900);
   };
 
   return (
@@ -50,10 +50,21 @@ const AuraBot = ({ isWidget = false }) => {
         <div className="aura-avatar">
           <Sparkles size={20} color="white" />
         </div>
-        <div>
+        <div style={{ flex: 1 }}>
           <h2 className="text-lg font-bold">Aura Bot ✨</h2>
           <p className="text-xs opacity-70">Always serving knowledge</p>
         </div>
+        {onClose && (
+          <button
+            type="button"
+            onClick={onClose}
+            className="icon-btn"
+            style={{ background: 'transparent', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', padding: '4px' }}
+            aria-label="Close Aura Bot"
+          >
+            <X size={20} />
+          </button>
+        )}
       </div>
 
       <div className="messages-list">

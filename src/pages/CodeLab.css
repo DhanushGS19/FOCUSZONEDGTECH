@@ -1,0 +1,213 @@
+.codelab-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.codelab-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0.85rem 1.25rem;
+}
+
+.codelab-select {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.45rem 0.85rem;
+  color: var(--text-primary);
+  font-size: 0.8125rem;
+  outline: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.codelab-select:focus {
+  border-color: var(--primary-accent);
+}
+
+.stdin-panel {
+  background: rgba(37, 99, 235, 0.06);
+  border: 1px solid rgba(37, 99, 235, 0.28);
+  border-radius: var(--radius-md);
+}
+
+.stdin-textarea {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.6rem 0.85rem;
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  outline: none;
+  resize: vertical;
+}
+
+.stdin-textarea:focus {
+  border-color: var(--primary-accent);
+}
+
+/* Repositioned IDE Grid: Output Console on Left (1fr) | Editor Center (1.35fr) | Explorer on Right (210px) */
+.codelab-ide-container {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr 210px;
+  gap: 1rem;
+  min-height: 590px;
+  align-items: stretch;
+}
+
+.codelab-ide-container.no-explorer {
+  grid-template-columns: 1fr 1.35fr;
+}
+
+@media (max-width: 1200px) {
+  .codelab-ide-container {
+    grid-template-columns: 1fr 200px;
+  }
+  .codelab-ide-container .output-panel {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .codelab-ide-container {
+    grid-template-columns: 1fr;
+  }
+  .codelab-ide-container.no-explorer {
+    grid-template-columns: 1fr;
+  }
+}
+
+.explorer-panel {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.explorer-file-item {
+  border: 1px solid transparent;
+  color: var(--text-muted);
+}
+
+.explorer-file-item.active-file {
+  background: var(--bg-elevated);
+  border-color: rgba(37, 99, 235, 0.4);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.editor-panel {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.65rem 0.95rem;
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--border);
+}
+
+.editor-wrapper {
+  display: flex;
+  flex: 1;
+  min-height: 500px;
+  background: #080D18;
+  position: relative;
+}
+
+.line-numbers {
+  width: 44px;
+  padding: 1rem 0;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  user-select: none;
+  background: #060A14;
+  border-right: 1px solid var(--border);
+  line-height: 1.6;
+}
+
+.line-numbers > div {
+  padding-right: 0.75rem;
+}
+
+.code-textarea {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #F8FAFC;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  padding: 1rem;
+  resize: none;
+  outline: none;
+  white-space: pre;
+  overflow-wrap: normal;
+  overflow-x: auto;
+  tab-size: 2;
+}
+
+.output-panel {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.terminal-content {
+  flex: 1;
+  padding: 1rem;
+  background: #060912;
+  overflow-y: auto;
+  min-height: 500px;
+  color: #F1F5F9;
+}
+
+.preview-iframe {
+  flex: 1;
+  width: 100%;
+  min-height: 500px;
+  border: none;
+  background: #ffffff;
+}
+
+/* Modals */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 1rem;
+}
+
+.modal-content {
+  width: 100%;
+  max-width: 440px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+}

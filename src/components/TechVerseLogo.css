@@ -1,0 +1,48 @@
+.techverse-brand-wrapper {
+  user-select: none;
+  text-decoration: none;
+}
+
+.techverse-symbol-svg {
+  filter: drop-shadow(0 0 12px rgba(37, 99, 235, 0.4));
+  transition: transform 0.3s ease;
+}
+
+.techverse-brand-wrapper:hover .techverse-symbol-svg {
+  transform: rotate(15deg) scale(1.05);
+}
+
+.techverse-wordmark {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  letter-spacing: 0.08em;
+  line-height: 1.1;
+  font-weight: 800;
+}
+
+.techverse-version-tag {
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.techverse-loader-pulse {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.techverse-loader-pulse::after {
+  content: '';
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 1px dashed rgba(56, 189, 248, 0.4);
+  animation: tvSpin 6s linear infinite;
+}
+
+@keyframes tvSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

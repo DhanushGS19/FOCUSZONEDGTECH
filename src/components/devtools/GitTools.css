@@ -1,0 +1,36 @@
+.git-tools-container {
+  width: 100%;
+}
+
+.git-tabs-header {
+  border-bottom: 1px solid var(--border);
+}
+
+.commit-node-card {
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.commit-node-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.code-diff-view {
+  border-left: 3px solid var(--amber);
+}
+
+.bg-amber-500-10 {
+  background: rgba(245, 158, 11, 0.1);
+}
+
+.border-amber {
+  border-color: rgba(245, 158, 11, 0.4);
+}
+
+.border-primary {
+  border-color: var(--primary) !important;
+}
+
+.border-cyan {
+  border-color: var(--cyan) !important;
+}

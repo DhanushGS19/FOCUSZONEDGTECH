@@ -1,0 +1,13 @@
+.api-tester-container {
+  width: 100%;
+}
+
+.method-select {
+  cursor: pointer;
+  outline: none;
+}
+
+.security-notice {
+  background: rgba(6, 182, 212, 0.05);
+  border-left: 3px solid var(--cyan);
+}

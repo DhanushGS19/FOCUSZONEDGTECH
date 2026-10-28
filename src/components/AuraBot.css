@@ -21,12 +21,12 @@
   display: flex;
   align-items: center;
   padding: 1.25rem;
-  background: linear-gradient(90deg, rgba(139, 92, 246, 0.2), rgba(16, 185, 129, 0.2));
+  background: linear-gradient(90deg, rgba(37, 99, 235, 0.2), rgba(16, 185, 129, 0.2));
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .aura-avatar {
-  background: linear-gradient(135deg, #f43f5e, #8b5cf6);
+  background: linear-gradient(135deg, #2563eb, #10b981);
   width: 40px;
   height: 40px;
   border-radius: 12px;
@@ -34,7 +34,7 @@
   align-items: center;
   justify-content: center;
   margin-right: 1rem;
-  box-shadow: 0 4px 10px rgba(244, 63, 94, 0.4);
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.35);
 }
 
 .messages-list {

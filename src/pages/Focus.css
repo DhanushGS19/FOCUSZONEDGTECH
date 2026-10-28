@@ -1,176 +1,191 @@
+/* =================================================================== */
+/* TECHVERSE FOCUS STUDIO & DND TIME LOCK STYLING */
+/* =================================================================== */
+
 .focus-container {
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: calc(100vh - 4rem);
+  gap: 1.75rem;
+  padding: 0.5rem 0 3rem;
+  position: relative;
 }
 
+/* Header Deck */
+.focus-header-deck {
+  padding-bottom: 1.25rem;
+}
+
+.dnd-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 1rem;
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dnd-toggle-btn:hover:not(:disabled) {
+  border-color: var(--primary);
+  color: var(--text-primary);
+  background: var(--bg-elevated);
+}
+
+.dnd-toggle-btn.active {
+  background: var(--emerald-subtle);
+  border-color: rgba(16, 185, 129, 0.35);
+  color: var(--emerald);
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.15);
+}
+
+.dnd-toggle-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Main Focus Deck */
 .focus-main-panel {
-  width: 100%;
-  max-width: 600px;
-  padding: 4rem 2rem;
-  border-radius: 32px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  position: relative;
 }
 
-.timer-display {
-  font-size: clamp(3.2rem, 15vw, 7.5rem);
-  font-weight: 800;
-  line-height: 1;
-  margin-bottom: 2rem;
-  font-variant-numeric: tabular-nums;
-  background: linear-gradient(135deg, #fff, var(--text-muted));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  white-space: nowrap;
-}
-
-.timer-progress {
-  height: 12px;
-  border-radius: 6px;
-  background: rgba(0,0,0,0.3);
-}
-
-.max-w-md {
-  max-width: 28rem;
-}
-
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.timer-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1rem 2rem;
-  font-size: 1.25rem;
-  border-radius: 16px;
-}
-
-.bg-danger {
-  background: rgba(239, 68, 68, 0.1);
-  color: var(--danger);
-  border-color: rgba(239, 68, 68, 0.2);
-}
-
-.hover-danger:hover {
-  background: var(--danger);
-  color: white;
-}
-
-.focus-actions {
-  width: 100%;
-  max-width: 600px;
-}
-
-.action-btn {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 1.25rem;
-  border-radius: 16px;
-}
-
-.stuck-btn {
-  background: linear-gradient(135deg, rgba(236, 72, 153, 0.1), rgba(139, 92, 246, 0.1));
-  border-color: rgba(236, 72, 153, 0.3);
-  color: #f472b6;
-}
-
-.stuck-btn:hover {
-  background: rgba(236, 72, 153, 0.2);
-}
-
-.complete-btn {
-  background: rgba(16, 185, 129, 0.1);
-  border-color: rgba(16, 185, 129, 0.3);
-  color: var(--accent);
-}
-
-.complete-btn:hover {
-  background: rgba(16, 185, 129, 0.2);
-}
-
-.focus-pulse {
+.focus-pulse-glow {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.05) 0%, transparent 70%);
-  z-index: -1;
-  animation: pulse 4s infinite ease-in-out;
+  width: 90%;
+  height: 90%;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.06) 0%, transparent 65%);
+  z-index: 0;
+  pointer-events: none;
+  animation: focusPulse 6s ease-in-out infinite;
 }
 
-@keyframes pulse {
-  0% { transform: translate(-50%, -50%) scale(0.95); opacity: 0.5; }
-  50% { transform: translate(-50%, -50%) scale(1.05); opacity: 1; }
-  100% { transform: translate(-50%, -50%) scale(0.95); opacity: 0.5; }
+@keyframes focusPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(0.96); opacity: 0.4; }
+  50% { transform: translate(-50%, -50%) scale(1.04); opacity: 0.85; }
 }
 
-.success-panel {
-  padding: 5rem 3rem;
-  width: 100%;
-  max-width: 600px;
+/* DND Active Strip */
+.dnd-active-strip {
+  position: relative;
+  z-index: 1;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1.25rem;
 }
 
-.confetti-icon {
-  font-size: 5rem;
-  margin-bottom: 1rem;
-  animation: bounce 2s infinite;
+/* Central Timer Display */
+.timer-display-box {
+  position: relative;
+  z-index: 1;
+  padding: 1.5rem 0;
 }
 
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
+.timer-digits {
+  font-family: var(--font-mono);
+  line-height: 1;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  letter-spacing: -0.02em;
 }
 
-.stat-pill {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  padding: 0.75rem 1.5rem;
-  border-radius: 20px;
-  font-weight: 500;
+/* Emergency Unlock Hold Button */
+.emergency-unlock-wrapper {
+  position: relative;
+  z-index: 1;
 }
 
-@media (max-width: 640px) {
+.emergency-unlock-btn {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 2rem;
+  border-radius: var(--radius-lg);
+  background: #182238;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  cursor: pointer;
+  user-select: none;
+  min-width: 250px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  transition: all 0.2s ease;
+}
+
+.emergency-unlock-btn:hover {
+  border-color: var(--danger);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.25);
+}
+
+.unlock-fill-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, rgba(239, 68, 68, 0.7), rgba(245, 158, 11, 0.8));
+  transition: width 0.12s linear;
+  z-index: 1;
+}
+
+/* Distraction Blocker Modal */
+.dnd-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 12, 20, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.dnd-modal-card {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.35);
+}
+
+/* Side Widget Flyout (Aura AI & SafeSearch in Focus) */
+.side-widget-flyout {
+  border-radius: var(--radius-lg);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--border);
+  animation: slideDown 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.in-session-floating-dock {
+  position: relative;
+  z-index: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
   .focus-container {
-    min-height: auto;
-    padding: 1rem 0;
+    padding: 0 0 2rem;
+    gap: 1.25rem;
   }
   .focus-main-panel {
-    padding: 2rem 1.25rem;
-    border-radius: 20px;
+    padding: 1.5rem 1rem;
+    border-radius: var(--radius-lg);
   }
-  .timer-btn {
-    padding: 0.75rem 1.25rem;
-    font-size: 1rem;
-    border-radius: 12px;
-  }
-  .focus-actions {
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-  .action-btn {
-    padding: 1rem;
-    font-size: 0.95rem;
-    border-radius: 12px;
-  }
-  .success-panel {
-    padding: 2.5rem 1.25rem;
-  }
-  .confetti-icon {
-    font-size: 3.5rem;
-  }
-  .stats-row {
-    flex-direction: column;
-    gap: 0.5rem;
+  .timer-digits {
+    font-size: 3.75rem;
   }
 }
 

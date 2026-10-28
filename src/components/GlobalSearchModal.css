@@ -1,0 +1,34 @@
+.global-search-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 10vh;
+  z-index: 9999;
+  animation: fadeIn 0.15s ease-out;
+}
+
+.global-search-modal {
+  width: 100%;
+  max-width: 640px;
+  background: #0c1220;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px var(--primary-glow);
+  overflow: hidden;
+}
+
+.search-modal-header {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.search-modal-input::placeholder {
+  color: var(--text-muted);
+}
+
+.search-result-row {
+  margin-bottom: 4px;
+}
