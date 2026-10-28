@@ -774,3 +774,41 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 640px) {
+  .home-dashboard {
+    gap: 1rem;
+  }
+
+  .executive-command-strip {
+    padding: 0.85rem !important;
+    gap: 0.75rem !important;
+  }
+
+  .workspace-tab-dock {
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 0.4rem;
+  }
+
+  .workspace-tab-dock::-webkit-scrollbar {
+    display: none;
+  }
+
+  .telemetry-stats-pill-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.4rem;
+  }
+
+  .kpi-2x2-grid {
+    gap: 0.5rem;
+  }
+
+  .scratchpad-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+}

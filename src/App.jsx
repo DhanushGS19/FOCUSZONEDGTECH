@@ -20,10 +20,9 @@ import Login from './pages/Login';
 import AuraBot from './components/AuraBot';
 import { GlobalSearchModal } from './components/GlobalSearchModal';
 import TopNav from './components/TopNav';
-import { TechVerseSymbol } from './components/TechVerseLogo';
 import { useUser } from './context/UserContext';
 import { 
-  Menu, LayoutDashboard, Code2, Bot, Wrench, Sparkles, X, Search 
+  Menu, LayoutDashboard, Compass, Terminal, Brain, Award, Sparkles, X, Search 
 } from 'lucide-react';
 
 const App = () => {
@@ -51,46 +50,16 @@ const App = () => {
 
   return (
     <div className="layout" key={location.pathname.startsWith('/login') ? 'auth' : 'main'}>
-      {/* Mobile Top Bar (visible on mobile only) */}
-      <header className="mobile-topbar">
-        <div className="mobile-topbar-left">
-          <button
-            type="button"
-            className="mobile-menu-btn"
-            onClick={() => setMobileMenuOpen(true)}
-            aria-label="Open Navigation Menu"
-          >
-            <Menu size={22} />
-          </button>
-          <div className="mobile-topbar-brand">
-            <TechVerseSymbol size={24} />
-            <span>TechVerse</span>
-          </div>
-        </div>
-        <div className="mobile-topbar-right">
-          <button 
-            type="button" 
-            className="mobile-menu-btn" 
-            onClick={() => setSearchModalOpen(true)}
-            aria-label="Search TechVerse"
-            title="Search (Ctrl+K)"
-          >
-            <Search size={18} />
-          </button>
-          <div className="mobile-xp-pill">{user?.xp || 0} XP</div>
-          <NavLink to="/profile" className="mobile-avatar-badge" aria-label="Profile">
-            {user?.name ? user.name.charAt(0) : 'U'}
-          </NavLink>
-        </div>
-      </header>
-
-      {/* Sidebar: Left drawer on desktop, slide-over drawer with overlay on mobile */}
+      {/* Sidebar: Left persistent rail on desktop, slide-over drawer with overlay on mobile */}
       <Sidebar isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 
-      {/* Main Layout Body with TopNav and Content Area */}
+      {/* Main Layout Body with Unified Responsive TopNav and Content Area */}
       <div className="layout-body">
-        {/* Desktop Top Navigation Bar */}
-        <TopNav onOpenSearch={() => setSearchModalOpen(true)} />
+        {/* Executive Top Navigation Bar (Adaptive across Desktop, Tablet & Mobile) */}
+        <TopNav 
+          onOpenSearch={() => setSearchModalOpen(true)} 
+          onToggleSidebar={() => setMobileMenuOpen(true)} 
+        />
 
         {/* Main Content Area */}
         <main className="main-content">
@@ -145,28 +114,32 @@ const App = () => {
       )}
 
       {/* Mobile Bottom Navigation for quick thumb-reach access */}
-      <nav className="mobile-bottom-nav">
+      <nav className="mobile-bottom-nav" aria-label="Mobile Bottom Navigation">
         <NavLink to="/" className={({ isActive }) => `bottom-nav-item ${isActive ? 'active' : ''}`} end onClick={() => setMobileMenuOpen(false)}>
           <LayoutDashboard size={18} />
           <span>Home</span>
         </NavLink>
+        <NavLink to="/learn" className={({ isActive }) => `bottom-nav-item ${isActive ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>
+          <Compass size={18} />
+          <span>Learn</span>
+        </NavLink>
         <NavLink to="/code-lab" className={({ isActive }) => `bottom-nav-item ${isActive ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>
-          <Code2 size={18} />
+          <Terminal size={18} />
           <span>Code</span>
         </NavLink>
-        <NavLink to="/flow-ai" className={({ isActive }) => `bottom-nav-item ${isActive ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>
-          <Bot size={18} />
-          <span>Flow AI</span>
+        <NavLink to="/practice" className={({ isActive }) => `bottom-nav-item ${isActive ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>
+          <Brain size={18} />
+          <span>Arena</span>
         </NavLink>
-        <NavLink to="/dev-tools" className={({ isActive }) => `bottom-nav-item ${isActive ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>
-          <Wrench size={18} />
-          <span>Tools</span>
+        <NavLink to="/certificates" className={({ isActive }) => `bottom-nav-item ${isActive ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>
+          <Award size={18} />
+          <span>Certs</span>
         </NavLink>
         <button
           type="button"
           className={`bottom-nav-item ${mobileMenuOpen ? 'active' : ''}`}
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle navigation menu"
+          aria-label="Open Navigation Drawer"
         >
           <Menu size={18} />
           <span>More</span>

@@ -368,8 +368,144 @@
   font-weight: 600;
 }
 
-@media (max-width: 900px) {
+/* =================================================================== */
+/* RESPONSIVE & ADAPTIVE TOP NAVIGATION (LAPTOP & MOBILE UNIFIED) */
+/* =================================================================== */
+
+.mobile-nav-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.mobile-nav-toggle:hover {
+  background: var(--bg-card);
+  color: var(--primary-accent);
+}
+
+.mobile-search-trigger {
+  display: none;
+}
+
+@media (max-width: 1024px) {
   .topnav-bar {
+    padding: 0 1rem;
+    gap: 1rem;
+  }
+  .search-placeholder {
     display: none;
   }
+  .topnav-search-btn-center {
+    width: auto;
+    padding: 0.4rem 0.6rem;
+  }
 }
+
+@media (max-width: 900px) {
+  .topnav-bar {
+    display: flex;
+    height: 52px;
+    padding: 0 0.85rem;
+    gap: 0.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 120;
+    background: rgba(12, 18, 30, 0.96);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .mobile-nav-toggle {
+    display: flex;
+  }
+
+  .breadcrumb-divider-vertical {
+    display: none;
+  }
+
+  .system-status-indicator {
+    padding: 0.2rem;
+    background: transparent;
+    border: none;
+  }
+
+  .system-status-indicator .status-label {
+    display: none;
+  }
+
+  .breadcrumb-section,
+  .topnav-breadcrumb .breadcrumb-separator:nth-of-type(1) {
+    display: none;
+  }
+
+  .topnav-center-cluster {
+    display: none;
+  }
+
+  .mobile-search-trigger {
+    display: flex;
+  }
+
+  .topnav-create-btn span {
+    display: none;
+  }
+
+  .topnav-create-btn {
+    padding: 0.35rem 0.55rem;
+  }
+
+  .user-details-mini {
+    display: none;
+  }
+
+  .topnav-profile-pill {
+    padding: 0.15rem;
+    border: none;
+    background: transparent;
+  }
+
+  .topnav-dropdown {
+    right: -0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .topnav-bar {
+    padding: 0 0.55rem;
+    gap: 0.35rem;
+  }
+
+  .topnav-left-cluster {
+    gap: 0.35rem;
+  }
+
+  .brand-root {
+    font-size: 0.725rem;
+  }
+
+  .breadcrumb-current {
+    font-size: 0.725rem;
+    max-width: 90px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .topnav-right-cluster {
+    gap: 0.25rem;
+  }
+
+  .topnav-icon-btn {
+    width: 30px;
+    height: 30px;
+  }
+}
+

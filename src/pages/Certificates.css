@@ -397,3 +397,37 @@
     color: #000000 !important;
   }
 }
+
+@media (max-width: 640px) {
+  .cert-modal-overlay {
+    padding: 0.5rem;
+  }
+  .certificate-ornate-border {
+    margin: 0.4rem;
+    padding: 0.2rem;
+  }
+  .certificate-inner-frame {
+    padding: 1.25rem 0.75rem;
+  }
+  .cert-recipient-name {
+    font-size: 1.45rem !important;
+  }
+  .cert-degree-title {
+    font-size: 1rem !important;
+  }
+  .cert-statement {
+    font-size: 0.75rem;
+  }
+  .cert-skills-summary {
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 0.5rem;
+  }
+  .cert-signature-row {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    text-align: center;
+  }
+}
+

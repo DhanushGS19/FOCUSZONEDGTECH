@@ -396,7 +396,10 @@
     top: 0;
     left: 0;
     bottom: 0;
-    width: 270px !important;
+    width: 275px !important;
+    height: 100vh;
+    height: 100dvh;
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom, 12px));
     transform: translateX(-100%);
     transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 200;

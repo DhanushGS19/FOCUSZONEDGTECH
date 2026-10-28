@@ -351,6 +351,7 @@ button.icon-btn:hover, .btn-icon:hover {
   display: flex;
   width: 100%;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   background-color: var(--bg-primary);
 }
@@ -361,6 +362,7 @@ button.icon-btn:hover, .btn-icon:hover {
   flex: 1;
   min-width: 0;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
 }
 
@@ -453,114 +455,139 @@ input:focus, textarea:focus, select:focus {
   background: rgba(255, 255, 255, 0.22);
 }
 
-/* Mobile Topbar */
-.mobile-topbar {
-  display: none;
-  height: 52px;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 1rem;
-  background-color: var(--bg-sidebar);
-  border-bottom: 1px solid var(--border);
-}
-
-.mobile-topbar-left, .mobile-topbar-right {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-}
-
-.mobile-menu-btn {
-  background: transparent;
-  border: none;
-  color: var(--text-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.25rem;
-  cursor: pointer;
-}
-
-.mobile-topbar-brand {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 1rem;
-  color: var(--text-primary);
-}
-
-.mobile-xp-pill {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--emerald);
-  background: var(--emerald-subtle);
-  border: 1px solid rgba(16, 185, 129, 0.3);
-  padding: 2px 7px;
-  border-radius: var(--radius-sm);
-  font-weight: 600;
-}
-
-.mobile-avatar-badge {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary), var(--emerald));
-  color: #fff;
-  font-weight: 700;
-  font-size: 0.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+/* =================================================================== */
+/* RESPONSIVE MOBILE NAVIGATION DOCK & FLOATING WIDGETS */
+/* =================================================================== */
 
 .mobile-bottom-nav {
   display: none;
 }
 
+/* Floating Aura Bot Assistant */
+.aurabot-floating-btn {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 2rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--emerald));
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 140;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.aurabot-floating-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 25px rgba(16, 185, 129, 0.55);
+}
+
+.aurabot-floating-btn.active {
+  background: #182238;
+  border-color: var(--border);
+  color: var(--text-muted);
+}
+
+.aurabot-floating-window {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 5.5rem;
+  width: 380px;
+  max-width: calc(100vw - 2rem);
+  height: 520px;
+  max-height: calc(100dvh - 120px);
+  z-index: 145;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.8), 0 0 25px rgba(37, 99, 235, 0.25);
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 @media (max-width: 900px) {
-  .layout {
-    flex-direction: column;
-  }
-  .mobile-topbar {
-    display: flex;
-  }
   .main-content {
-    padding: 1rem 1rem 5rem 1rem;
+    padding: 1rem 0.85rem calc(60px + env(safe-area-inset-bottom, 16px) + 0.75rem) 0.85rem;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
   }
+
   .mobile-bottom-nav {
     display: flex;
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 58px;
-    background: var(--bg-sidebar);
+    height: calc(56px + env(safe-area-inset-bottom, 0px));
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    background: rgba(12, 18, 30, 0.96);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border-top: 1px solid var(--border);
     justify-content: space-around;
     align-items: center;
-    z-index: 100;
-    padding: 0 0.5rem;
+    z-index: 150;
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.6);
   }
+
   .bottom-nav-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.2rem;
+    justify-content: center;
+    gap: 0.15rem;
     font-size: 0.65rem;
     color: var(--text-muted);
     background: transparent;
     border: none;
-    padding: 0.4rem 0.6rem;
+    padding: 0.35rem 0.45rem;
     border-radius: var(--radius-sm);
     text-decoration: none;
     transition: all 0.15s ease;
+    flex: 1;
+    min-width: 0;
   }
+
+  .bottom-nav-item svg {
+    transition: transform 0.15s ease, color 0.15s ease;
+  }
+
+  .bottom-nav-item:hover {
+    color: var(--text-primary);
+  }
+
   .bottom-nav-item.active {
-    color: var(--primary-accent);
+    color: var(--emerald);
+    font-weight: 600;
+  }
+
+  .bottom-nav-item.active svg {
+    color: var(--emerald);
+    transform: translateY(-1px);
+    filter: drop-shadow(0 0 6px rgba(16, 185, 129, 0.6));
+  }
+
+  .aurabot-floating-btn {
+    bottom: calc(62px + env(safe-area-inset-bottom, 8px));
+    right: 1rem;
+    width: 42px;
+    height: 42px;
+  }
+
+  .aurabot-floating-window {
+    right: 0.75rem;
+    left: 0.75rem;
+    width: auto;
+    max-width: none;
+    bottom: calc(64px + env(safe-area-inset-bottom, 8px));
+    height: calc(100dvh - 130px);
   }
 }
+
 
 /* Core Flexbox & Grid Utilities Engine */
 .flex { display: flex; }

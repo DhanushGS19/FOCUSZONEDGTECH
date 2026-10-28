@@ -5,7 +5,7 @@ import { TechVerseSymbol } from './TechVerseLogo';
 import { 
   Search, Bell, Moon, Sun, ChevronRight, Plus, Terminal, 
   FolderPlus, Brain, Sparkles, User, LogOut,
-  Timer, ShieldCheck, Award
+  Timer, ShieldCheck, Award, Menu
 } from 'lucide-react';
 import './TopNav.css';
 
@@ -26,7 +26,7 @@ const BREADCRUMB_MAP = {
   '/competition': { section: 'Community', title: 'Leaderboard' }
 };
 
-export const TopNav = ({ onOpenSearch }) => {
+export const TopNav = ({ onOpenSearch, onToggleSidebar }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, theme, toggleTheme, logout } = useUser();
@@ -64,9 +64,21 @@ export const TopNav = ({ onOpenSearch }) => {
 
   return (
     <header className="topnav-bar">
-      {/* 1. Left Cluster: System Operational Indicator + Dynamic Breadcrumbs */}
+      {/* 1. Left Cluster: Mobile Menu Toggle + System Status Indicator + Dynamic Breadcrumbs */}
       <div className="topnav-left-cluster">
-        {/* Repositioned: Operational Status Badge on far-left */}
+        {onToggleSidebar && (
+          <button
+            type="button"
+            className="mobile-nav-toggle"
+            onClick={onToggleSidebar}
+            aria-label="Open Navigation Menu"
+            title="Open Menu"
+          >
+            <Menu size={20} />
+          </button>
+        )}
+
+        {/* Operational Status Badge */}
         <div className="system-status-indicator" title="All systems operational: Piston Sandbox, TechVerse DB & Compiler">
           <span className="status-dot"></span>
           <span className="status-label">Operational</span>
@@ -86,7 +98,7 @@ export const TopNav = ({ onOpenSearch }) => {
         </div>
       </div>
 
-      {/* 2. Center Cluster: Global Command Search (Repositioned to prominent center) */}
+      {/* 2. Center Cluster: Global Command Search (Prominent Desktop Search) */}
       <div className="topnav-center-cluster">
         <button
           type="button"
@@ -100,9 +112,20 @@ export const TopNav = ({ onOpenSearch }) => {
         </button>
       </div>
 
-      {/* 3. Right Cluster: Quick Create Action + Notifications + Utilities + Profile */}
+      {/* 3. Right Cluster: Search (Mobile) + Quick Create + Notifications + Utilities + Profile */}
       <div className="topnav-right-cluster">
-        {/* Quick Create Action Button (Moved next to user actions) */}
+        {/* Mobile Search Button (visible when center search is hidden) */}
+        <button
+          type="button"
+          className="topnav-icon-btn mobile-search-trigger"
+          onClick={onOpenSearch}
+          title="Search (Ctrl+K)"
+          aria-label="Search across TechVerse"
+        >
+          <Search size={16} />
+        </button>
+
+        {/* Quick Create Action Button */}
         <div className="relative" ref={createRef}>
           <button
             type="button"
